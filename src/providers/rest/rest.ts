@@ -37,7 +37,7 @@ export class RestProvider {
     addUser (userData : User){
     return this.http.post(apiUrl+'api/auth/register/',userData, httpOptions)
     .subscribe((data:any)=>{
-                  this.storage.set('Data',data);
+                  this.storage.set(data.user.username,data);
                   this.token = data.token; 
                   this.username = data.user.username;
                   httpOptions = {
@@ -61,7 +61,7 @@ export class RestProvider {
      }
     return this.http.post(apiUrl+'api/auth/login/',content, httpOptions)
     .subscribe((data:any)=>{
-                  this.storage.set('Data',data);
+                  this.storage.set(data.user.username,data);
                   this.token = data.token;
                   //this.username = data.user.username;
                   httpOptions = {
@@ -77,6 +77,16 @@ export class RestProvider {
               }
     )
 
+  }
+  userLogout(username: string) {
+    var userData = this.storage.get(username);
+    if(userData){
+      this.storage.remove(username);
+      console.log("Successfully Logged Out");
+    }
+    else{
+      console.log("An error occurred dunring the removal of key");
+    }
   }
   getLevel(){
       httpOptions = {
