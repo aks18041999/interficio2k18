@@ -15,12 +15,12 @@
 
 <ion-content padding *ngIf="loaded==true" class="body">
 
-<aside class="profile-card">
+<div class="profile-card">
 
     <header>
     
         <!-- here’s the avatar -->
-        <a href="http://victory-design.ru/">
+        <a href="https://nitdgplug.org">
             <img src="http://icons.iconarchive.com/icons/3xhumed/mega-games-pack-33/128/God-of-War-III-2-icon.png" />
         </a>
         
@@ -38,11 +38,13 @@
         <h1>Score : {{player.score}}</h1>
         <h1>Rank : {{player.rank}}</h1>
         <h1>Level :{{player.current_level}}</h1>
-    
+     <!-- <button ion-button color="danger" (click)="goToLevel()">Go To Level</button>
+    -->
     </div>
-
+    
+    
     <!-- some social links to show off -->
     
-</aside>
+</div>
 </ion-content>
 

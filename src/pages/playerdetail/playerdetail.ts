@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {RestProvider} from '../../providers/rest/rest';
 import {Observable} from 'rxjs';
 import {Storage} from '@ionic/storage';
+import {QuestionPage} from '../question/question';
 //import * as global from '../../global'
 /**
  * Generated class for the PlayerdetailPage page.
@@ -51,6 +52,9 @@ export class PlayerdetailPage {
    ionViewDidLoad() {
     console.log('ionViewDidLoad PlayerdetailPage');
   }
-  
+  goToLevel(){
+    console.log('go to ques');
+    this.navCtrl.setRoot(QuestionPage);
+  }
 
 }

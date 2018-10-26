@@ -50,7 +50,7 @@ export class MyApp {
     
     events.subscribe('user:loggedin',(username)=>{
       this.menu = this.pages;
-      this.openPage({title: 'Player detail', component: PlayerdetailPage});
+      this.openPage({title: 'Questions', component: QuestionPage});
       console.log(username);
       
 
@@ -84,7 +84,8 @@ export class MyApp {
       console.log(this.TOKEN);
       //localStorage.removeItem('PresentPage');
       this.rootPage = localStorage.getItem('PresentPage');
-      this.rootPage = this.TOKEN?PlayerdetailPage:HomePage;
+      console.log(this.rootPage);
+      this.rootPage = this.TOKEN?QuestionPage:HomePage;
     });
 
     

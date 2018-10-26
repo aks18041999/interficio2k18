@@ -60,7 +60,10 @@ pages: Array<{title: string, component: any}>;
        this.initMap()
   }
    initMap() {
-     this.watchId =  navigator.geolocation.watchPosition((position) => {
+     if(navigator.geolocation){
+       let options={
+          enableHighAccuracy: true, }       
+       navigator.geolocation.getCurrentPosition((position) => {
  
                              console.log(position);
          this.lat = position.coords.latitude;
@@ -77,20 +80,25 @@ pages: Array<{title: string, component: any}>;
                 //haanresolve(true);
                 let marker = new google.maps.Marker({
                   map: this.map,
-                  animation: google.maps.Animation.DROP,
+                //  animation: google.maps.Animation.DROP,
                   position: latLng
-              });
- 
- 
+              },
 
-    //this.directionsDisplay.setMap(this.map);
-  });
-
-    
+             
+              );
+      },
+      error=>{console.log(error)},
+      options);
+     }
+     else{
+       console.log('nhi ho rha');
+     }
+  
    }
    ngOnDestroy(){
       navigator.geolocation.clearWatch(this.watchId);
    }
+   
    submitAnswer(answer : string){
      this.rest.submitAns(answer,this.level.level_no)
      .subscribe((data:any)=>{
@@ -134,7 +142,15 @@ pages: Array<{title: string, component: any}>;
     )
    }
   submitLocation(){
-   this.rest.submitLocation(this.level.level_no ,this.lat,this.lng)
+    if(navigator.geolocation){
+       let options={
+          enableHighAccuracy: true, }       
+       navigator.geolocation.getCurrentPosition((position) => {
+ 
+                             console.log(position);
+         this.lat = position.coords.latitude;
+         this.lng = position.coords.longitude;
+        this.rest.submitLocation(this.level.level_no ,this.lat,this.lng)
    .subscribe((data:any)=>{
        if(data.success == true) {
                       let alert = this.alertCtrl.create({
@@ -174,6 +190,15 @@ pages: Array<{title: string, component: any}>;
                 console.log(error);
               }
     )
+      },
+      error=>{console.log(error)},
+      options);
+     }
+     else{
+       console.log('nhi ho rha');
+     }
+  
+   
    }
 
 }
